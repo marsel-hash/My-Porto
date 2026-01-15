@@ -105,21 +105,21 @@ export const PHOTOS: Photo[] = [
   },
   {
     id: 'p2',
-    url: 'https://picsum.photos/800/1200?random=2',
+    url: '/img/2.webp',
     caption: 'Urban Solitude',
     exif: 'Fujifilm X-T4 • 23mm • f/2.0',
     orientation: 'portrait'
   },
   {
     id: 'p3',
-    url: 'https://picsum.photos/800/600?random=3',
+    url: '/img/3.webp',
     caption: 'Mountain Haze',
     exif: 'Canon R5 • 85mm • f/1.2',
-    orientation: 'landscape'
+    orientation: 'portrait'
   },
   {
     id: 'p4',
-    url: 'https://picsum.photos/800/1200?random=4',
+    url: '/img/4.webp',
     caption: 'Cyberpunk Alley',
     exif: 'Sony A7III • 50mm • f/1.8',
     orientation: 'portrait'
