@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { NAV_ITEMS } from '../constants';
+import { NAV_ITEMS, SITE_REPO } from '../constants';
 import { SectionId } from '../types';
-import { Terminal, Menu, X, Wifi, Battery, Clock, Volume2 } from 'lucide-react';
+import { Terminal, Menu, X, Wifi, Battery, Clock, Volume2, Github } from 'lucide-react';
 
 interface NavigationProps {
   onNavigate?: (id: SectionId) => void;
@@ -20,7 +20,6 @@ const Navigation: React.FC<NavigationProps> = ({ onNavigate }) => {
 
   useEffect(() => {
     const handleScroll = () => {
-      // Offset +300 digunakan untuk mendeteksi bagian aktif lebih awal saat scrolling
       const scrollPosition = window.scrollY + 300;
       for (const item of NAV_ITEMS) {
         const section = document.getElementById(item.id);
@@ -43,21 +42,17 @@ const Navigation: React.FC<NavigationProps> = ({ onNavigate }) => {
     if (onNavigate) onNavigate(id);
     setMobileMenuOpen(false);
     
-    // Beri sedikit delay agar menu mobile tertutup dulu (mencegah layout shift)
     setTimeout(() => {
       const element = document.getElementById(id);
       if (element) {
-        // Menggunakan window.scrollY untuk mendapatkan posisi absolut elemen terhadap dokumen
         const elementPosition = element.getBoundingClientRect().top + window.scrollY;
-        
-        // Tinggi Navbar = 40px (h-10). Kita beri buffer 20px. Total offset = 60px.
         const navHeight = 40;
         const buffer = 20;
         const offsetPosition = elementPosition - (navHeight + buffer);
   
         window.scrollTo({
           top: offsetPosition,
-          behavior: 'auto' // Instant/Auto for terminal feel
+          behavior: 'auto'
         });
       }
     }, 50);
@@ -65,10 +60,8 @@ const Navigation: React.FC<NavigationProps> = ({ onNavigate }) => {
 
   return (
     <>
-      {/* Polybar / Top Bar */}
       <nav className="fixed top-0 left-0 w-full z-50 bg-[#0A0A0A] border-b border-white/10 h-10 flex items-center justify-between px-4 font-mono text-xs select-none">
         
-        {/* Left: Workspaces / Nav */}
         <div className="flex items-center gap-4 h-full">
           <div className="flex items-center gap-2 px-3 h-full bg-term-green/10 border-r border-term-green/20 text-term-green font-bold hover:bg-term-green/20 transition-colors cursor-default">
             <Terminal className="w-3.5 h-3.5" />
@@ -76,7 +69,6 @@ const Navigation: React.FC<NavigationProps> = ({ onNavigate }) => {
             <span className="sm:hidden">ARCH</span>
           </div>
 
-          {/* Desktop Nav Items */}
           <div className="hidden md:flex items-center gap-1">
             {NAV_ITEMS.map((item, index) => (
               <button
@@ -93,35 +85,32 @@ const Navigation: React.FC<NavigationProps> = ({ onNavigate }) => {
                 <span className="group-hover:drop-shadow-[0_0_5px_rgba(255,255,255,0.5)] transition-all">
                   {item.label.toLowerCase()}
                 </span>
-                
-                {/* Active/Hover Underline Indicator */}
                 <span className={`absolute bottom-0 left-0 h-[2px] bg-term-cyan transition-all duration-300 ${activeSection === item.id ? 'w-full' : 'w-0 group-hover:w-full'}`}></span>
               </button>
             ))}
           </div>
 
-          {/* Mobile Section Indicator (Left side) */}
           <div className="md:hidden text-slate-500 whitespace-nowrap">
              {`[ ${activeSection.toUpperCase()} ]`}
           </div>
         </div>
 
-        {/* Right: System Status & Desktop Indicator */}
         <div className="flex items-center gap-3 sm:gap-4 h-full">
-          
-          {/* Desktop Section Indicator (Moved here to avoid overlap) */}
-          <div className="hidden md:flex items-center text-slate-500 border-r border-white/10 pr-4 mr-2 h-1/2 hover:text-white transition-colors cursor-help">
-             {`[ ${activeSection.toUpperCase()} ]`}
-          </div>
+          {/* Source Code Link */}
+          <a 
+            href={SITE_REPO}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hidden md:flex items-center gap-2 text-slate-400 hover:text-white transition-all border border-white/5 px-2 py-0.5 rounded bg-white/5 hover:border-term-cyan/50 group"
+          >
+            <Github className="w-3 h-3 group-hover:text-term-cyan transition-colors" />
+            <span>SOURCE</span>
+          </a>
 
-          <div className="hidden md:flex items-center gap-4 text-slate-400">
+          <div className="hidden md:flex items-center gap-4 text-slate-400 border-l border-white/10 pl-4">
             <div className="flex items-center gap-2 hover:text-term-green transition-colors cursor-pointer" title="Connected">
                <Wifi className="w-3.5 h-3.5" />
                <span>WLAN0: <span className="text-term-green drop-shadow-[0_0_3px_rgba(16,185,129,0.5)]">UP</span></span>
-            </div>
-            <div className="flex items-center gap-2 hover:text-white transition-colors">
-               <Volume2 className="w-3.5 h-3.5" />
-               <span>85%</span>
             </div>
             <div className="flex items-center gap-2 text-term-cyan hover:drop-shadow-[0_0_5px_rgba(6,182,212,0.8)] transition-all cursor-default">
                <Clock className="w-3.5 h-3.5" />
@@ -129,13 +118,11 @@ const Navigation: React.FC<NavigationProps> = ({ onNavigate }) => {
             </div>
           </div>
 
-          {/* Mobile Clock (Added) */}
           <div className="md:hidden flex items-center gap-1.5 text-term-cyan">
              <Clock className="w-3 h-3" />
              <span>{time.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}</span>
           </div>
 
-          {/* Mobile Menu Toggle */}
           <button 
             className="md:hidden text-white p-2 hover:bg-white/10 transition-colors rounded"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
@@ -145,12 +132,12 @@ const Navigation: React.FC<NavigationProps> = ({ onNavigate }) => {
         </div>
       </nav>
 
-      {/* Mobile Menu */}
       {mobileMenuOpen && (
         <div className="fixed inset-0 top-10 z-40 bg-black/95 p-4 md:hidden font-mono">
           <div className="border border-white/10 p-2 space-y-1">
-            <div className="bg-white/10 px-3 py-2 text-slate-400 text-xs mb-2">
-              // MENU SELECTION
+            <div className="bg-white/10 px-3 py-2 text-slate-400 text-xs mb-2 flex justify-between">
+              <span>// MENU SELECTION</span>
+              <a href={SITE_REPO} target="_blank" className="text-term-cyan underline">Get Source</a>
             </div>
             {NAV_ITEMS.map((item, index) => (
               <button
