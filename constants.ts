@@ -21,14 +21,13 @@ export const PROFILE: Profile = {
   heroText: "Identity: Marsel. Status: Online.", 
   avatarUrl: "/1.jpg",
   socials: {
-    // GANTI LINK DI BAWAH INI DENGAN LINK GITHUB & INSTAGRAM KAMU
     github: "https://github.com/marsel-hash", 
     instagram: "https://instagram.com/kazunji_"
   }
 };
 
 // URL Repository untuk website ini (Ganti jika kamu sudah buat repo sendiri)
-export const SITE_REPO = "https://github.com/marsel-hash/portfolio-web";
+export const SITE_REPO = "https://github.com/marsel-hash/My-Porto";
 
 export const PROJECTS: Project[] = [
   {
