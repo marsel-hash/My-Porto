@@ -106,21 +106,21 @@ export const PHOTOS: Photo[] = [
   {
     id: 'p2',
     url: '/img/2.webp',
-    caption: 'Urban Solitude',
+    caption: 'Beach',
     exif: 'Fujifilm X-T4 • 23mm • f/2.0',
     orientation: 'portrait'
   },
   {
     id: 'p3',
     url: '/img/3.webp',
-    caption: 'Mountain Haze',
+    caption: 'Ferrari 458 Italia',
     exif: 'Canon R5 • 85mm • f/1.2',
     orientation: 'portrait'
   },
   {
     id: 'p4',
     url: '/img/4.webp',
-    caption: 'Cyberpunk Alley',
+    caption: 'Theme park',
     exif: 'Sony A7III • 50mm • f/1.8',
     orientation: 'portrait'
   },
