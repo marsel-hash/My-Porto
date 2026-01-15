@@ -114,6 +114,14 @@ const App: React.FC = () => {
   const [systemState, setSystemState] = useState<SystemState>('booting');
   const [crtFinished, setCrtFinished] = useState(false);
 
+  // FORCE SCROLL TO TOP ON MOUNT & DISABLE SCROLL RESTORATION
+  useEffect(() => {
+    if ('scrollRestoration' in window.history) {
+      window.history.scrollRestoration = 'manual';
+    }
+    window.scrollTo(0, 0);
+  }, []);
+
   // Handle phase transitions
   const handleBootComplete = () => {
     setSystemState('blackout');
@@ -121,6 +129,8 @@ const App: React.FC = () => {
     // Switch to desktop after momentary blackout (simulating video mode switch)
     setTimeout(() => {
       setSystemState('desktop');
+      // Ensure we start at the top when the desktop appears
+      window.scrollTo(0, 0);
       // Play Sound Effect
       try { playStartupSound(); } catch(e) {}
     }, 800);
@@ -131,10 +141,12 @@ const App: React.FC = () => {
     if (systemState !== 'desktop') {
       document.body.style.overflow = 'hidden';
       document.body.style.height = '100vh';
+      window.scrollTo(0, 0);
     } else {
       // Restore native scroll
       document.body.style.overflow = '';
       document.body.style.height = '';
+      window.scrollTo(0, 0);
     }
 
     return () => {

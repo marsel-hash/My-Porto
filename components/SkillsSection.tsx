@@ -58,9 +58,9 @@ const ProgressBar: React.FC<{ label: string; color: string; percent: number }> =
   }, [percent]);
 
   return (
-    <div ref={barRef} className="flex items-center gap-4 text-xs md:text-sm font-mono mb-3 group">
-      <div className="w-24 md:w-32 text-slate-400 truncate text-right shrink-0 group-hover:text-white transition-colors">{label}</div>
-      <div className="flex-1 h-4 bg-slate-900 border border-slate-800 relative overflow-hidden">
+    <div ref={barRef} className="flex items-center gap-4 text-xs md:text-sm lg:text-base font-mono mb-4 group">
+      <div className="w-24 md:w-36 text-slate-400 truncate text-right shrink-0 group-hover:text-white transition-colors">{label}</div>
+      <div className="flex-1 h-5 md:h-6 bg-slate-900 border border-slate-800 relative overflow-hidden">
         {/* Animated Bar */}
         <div 
           className={`h-full ${color} transition-all duration-[1500ms] ease-out relative`} 
@@ -77,7 +77,7 @@ const ProgressBar: React.FC<{ label: string; color: string; percent: number }> =
            ))}
         </div>
       </div>
-      <div className="w-12 text-slate-300 text-right shrink-0 font-bold">
+      <div className="w-14 text-slate-300 text-right shrink-0 font-bold">
         {count}<span className="text-slate-500">%</span>
       </div>
     </div>
@@ -94,44 +94,47 @@ const SkillsSection: React.FC = () => {
   };
 
   return (
-    <section id="skills" className="py-20 px-4">
-      <div className="max-w-5xl mx-auto">
+    <section id="skills" className="py-20 px-4 md:px-8">
+      <div className="max-w-7xl mx-auto">
         <Reveal>
-          <div className="mb-8">
-             <div className="text-sm font-mono text-slate-500 mb-2">$ htop --filter=skills</div>
-             <h2 className="text-2xl md:text-3xl font-bold text-white font-mono">
+          <div className="mb-10">
+             <div className="text-sm font-mono text-slate-500 mb-2 tracking-widest">$ htop --filter=skills</div>
+             <h2 className="text-3xl md:text-4xl font-bold text-white font-mono">
                System <span className="text-term-green">Resources</span>
              </h2>
           </div>
         </Reveal>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-10">
           {skills.map((skillGroup, idx) => (
             <Reveal key={idx} delay={idx * 0.1}>
-              <GlassCard variant="default" className="p-5 font-mono">
-                <div className="flex justify-between items-center mb-6 border-b border-white/5 pb-2">
-                  <h3 className="font-bold text-white uppercase tracking-wider">
-                    {/* PID style ID */}
-                    <span className="text-slate-600 mr-2">{1000 + idx}</span>
-                    {skillGroup.category}
-                  </h3>
-                  <div className={`w-2 h-2 rounded-full animate-pulse ${getCategoryColor(idx).replace('bg-', 'bg-')}`} />
-                </div>
+              {/* Removed padding from GlassCard to let the header span full width */}
+              <GlassCard variant="default" className="font-mono">
+                {/* Applied padding to content wrapper instead */}
+                <div className="p-5 md:p-8">
+                  <div className="flex justify-between items-center mb-8 border-b border-white/5 pb-3">
+                    <h3 className="font-bold text-white uppercase tracking-wider text-lg">
+                      {/* PID style ID */}
+                      <span className="text-slate-600 mr-2">{1000 + idx}</span>
+                      {skillGroup.category}
+                    </h3>
+                    <div className={`w-3 h-3 rounded-full animate-pulse ${getCategoryColor(idx).replace('bg-', 'bg-')}`} />
+                  </div>
 
-                <div className="space-y-1">
-                   {skillGroup.items.map((item, itemIdx) => {
-                      // Pseudo-random percent for visual flair, deterministic based on string length
-                      // Added randomness to make it look more like live CPU usage
-                      const percent = Math.min(98, 60 + (item.length * 4) + (itemIdx % 2 === 0 ? 5 : -5)); 
-                      return (
-                        <ProgressBar 
-                          key={itemIdx} 
-                          label={item} 
-                          color={getCategoryColor(idx)}
-                          percent={percent} 
-                        />
-                      );
-                   })}
+                  <div className="space-y-2">
+                     {skillGroup.items.map((item, itemIdx) => {
+                        // Pseudo-random percent for visual flair, deterministic based on string length
+                        const percent = Math.min(98, 60 + (item.length * 4) + (itemIdx % 2 === 0 ? 5 : -5)); 
+                        return (
+                          <ProgressBar 
+                            key={itemIdx} 
+                            label={item} 
+                            color={getCategoryColor(idx)}
+                            percent={percent} 
+                          />
+                        );
+                     })}
+                  </div>
                 </div>
               </GlassCard>
             </Reveal>

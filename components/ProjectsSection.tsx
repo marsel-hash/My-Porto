@@ -3,180 +3,136 @@ import GlassCard from './GlassCard';
 import Reveal from './Reveal';
 import { 
   ArrowUpRight, 
-  Folder, 
   Terminal, 
   Play, 
   ShieldCheck, 
-  Cpu, 
-  Webhook, 
-  FileCode, 
-  Binary, 
-  Code 
+  Code,
+  Layers,
+  Binary,
+  Cpu,
+  Folder
 } from 'lucide-react';
 import { useContent } from '../context/ContentContext';
 
-// Helper component to render icons based on tag name
 const TechIcon: React.FC<{ tag: string }> = ({ tag }) => {
   const t = tag.toLowerCase();
-  // Shared classes for consistent animation on hover
-  const iconClass = "w-5 h-5 transition-transform duration-300 group-hover/icon:scale-110 group-hover/icon:rotate-3";
+  const iconClass = "w-3 h-3 md:w-3.5 md:h-3.5";
 
-  // Custom SVG for specific languages to match the Lucide stroke style
-  if (t.includes('python')) {
-    return (
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={iconClass}>
-        <path d="M12 2c-3.5 0-4 2-4 3 0 1.5.5 2.5 3 2.5h4c1 0 1.5.5 1.5 1.5v2.5h-5c-3.5 0-4.5 1.5-4.5 4 0 3 1 3.5 4 3.5h1.5c2 0 2-.5 2-2v-2h-3c-1.5 0-2.5-.5-2.5-2.5 0-2 1-3 3-3h1.5v-1c0-2-1-3-3-3z" />
-        <path d="M12 22c3.5 0 4-2 4-3 0-1.5-.5-2.5-3-2.5h-4c-1 0-1.5-.5-1.5-1.5v-2.5h5c3.5 0 4.5-1.5 4.5-4 0-3-1-3.5-4-3.5h-1.5c-2 0-2 .5-2 2v2h3c1.5 0 2.5.5 2.5 2.5 0 2-1 3-3 3h-1.5v1c0 2 1 3 3 3z" />
-      </svg>
-    );
-  }
-
-  if (t.includes('php')) {
-    return (
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={iconClass}>
-        <ellipse cx="12" cy="12" rx="10" ry="6" />
-        <path d="M8 12h8" />
-        <path d="M12 8.5v7" />
-      </svg>
-    );
-  }
-
-  if (t.includes('react')) {
-    return (
-       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={`${iconClass} group-hover/icon:animate-[spin_4s_linear_infinite]`}>
-         <circle cx="12" cy="12" r="2" />
-         <path d="M12 2.5c-4.5 0-8.5 2.5-8.5 9.5s4 9.5 8.5 9.5 8.5-2.5 8.5-9.5-4-9.5-8.5-9.5z" transform="rotate(0 12 12)" />
-         <path d="M12 2.5c-4.5 0-8.5 2.5-8.5 9.5s4 9.5 8.5 9.5 8.5-2.5 8.5-9.5-4-9.5-8.5-9.5z" transform="rotate(60 12 12)" />
-         <path d="M12 2.5c-4.5 0-8.5 2.5-8.5 9.5s4 9.5 8.5 9.5 8.5-2.5 8.5-9.5-4-9.5-8.5-9.5z" transform="rotate(120 12 12)" />
-       </svg>
-    );
-  }
-
-  // Mapping Lucide icons to concepts
-  if (t.includes('cli') || t.includes('shell') || t.includes('bash')) return <Terminal className={iconClass} />;
-  if (t.includes('api') || t.includes('network')) return <Webhook className={iconClass} />;
-  if (t.includes('security') || t.includes('test')) return <ShieldCheck className={iconClass} />;
-  if (t.includes('algorithm') || t.includes('cpu')) return <Cpu className={iconClass} />;
-  if (t.includes('logic') || t.includes('data')) return <Binary className={iconClass} />;
-  if (t.includes('script')) return <FileCode className={iconClass} />;
-
-  // Default fallback
-  return <Code className={iconClass} />;
+  if (t.includes('python')) return <Binary className={iconClass} />;
+  if (t.includes('react') || t.includes('next')) return <Code className={iconClass} />;
+  if (t.includes('security') || t.includes('payload')) return <ShieldCheck className={iconClass} />;
+  if (t.includes('cli') || t.includes('bash')) return <Terminal className={iconClass} />;
+  if (t.includes('ai') || t.includes('logic')) return <Cpu className={iconClass} />;
+  
+  return <Layers className={iconClass} />;
 };
 
 const ProjectsSection: React.FC = () => {
   const { projects } = useContent();
 
   return (
-    <section id="projects" className="py-20 px-4">
-      <div className="max-w-6xl mx-auto">
+    <section id="projects" className="py-20 px-4 md:px-8">
+      <div className="max-w-7xl mx-auto">
         <Reveal>
-           <div className="mb-8 border-b border-slate-800 pb-4">
-              <span className="text-term-cyan font-mono text-sm">~/projects</span>
-              <h2 className="text-2xl md:text-3xl font-bold text-white font-mono mt-1 hover:text-term-cyan transition-colors duration-300 cursor-default">
-                ./deployments.sh
-              </h2>
+           <div className="flex items-center justify-between mb-10 border-b border-white/10 pb-4">
+              <div className="flex items-center gap-3">
+                <div className="p-2 bg-term-cyan/10 rounded border border-term-cyan/20 text-term-cyan">
+                   <Terminal className="w-5 h-5" />
+                </div>
+                <div>
+                   <div className="text-[10px] md:text-xs font-mono text-slate-500 tracking-widest uppercase">./deployments.sh</div>
+                   <h2 className="text-2xl md:text-3xl font-bold text-white font-mono mt-0.5">
+                     Featured <span className="text-term-cyan">Projects</span>
+                   </h2>
+                </div>
+              </div>
+              <div className="hidden md:block text-xs font-mono text-slate-500">
+                Total: <span className="text-white">{projects.length}</span>
+              </div>
            </div>
         </Reveal>
 
-        <div className="grid grid-cols-1 gap-6">
+        {/* 
+            GRID LAYOUT:
+            - Mobile: 1 Column
+            - Desktop: 2 Columns (Reduces vertical scroll height significantly)
+        */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
           {projects.map((project, index) => (
-            <Reveal key={project.id} delay={index * 0.1}>
+            <Reveal key={project.id} delay={index * 0.05}>
               <GlassCard 
                 variant="cyan"
-                className="group flex flex-col md:flex-row hover:bg-white/[0.02] transition-all"
+                className="group p-5 md:p-6 h-full flex flex-col transition-all duration-300 hover:bg-white/[0.03]"
                 noHeader
               >
-                {/* Left: Terminal Window Visual */}
-                <div className="md:w-1/3 bg-black/40 border-r border-white/5 p-4 flex flex-col justify-between group-hover:border-term-cyan/30 transition-colors duration-300">
-                   <div className="font-mono text-xs text-slate-500 mb-4 group-hover:text-slate-300 transition-colors">
-                      <div className="flex gap-2 mb-2">
-                        <div className="w-2 h-2 bg-red-500 rounded-full group-hover:brightness-125 transition-all"/>
-                        <div className="w-2 h-2 bg-yellow-500 rounded-full group-hover:brightness-125 transition-all"/>
-                        <div className="w-2 h-2 bg-green-500 rounded-full group-hover:brightness-125 transition-all"/>
+                {/* Header: Title, Status, and Links */}
+                <div className="flex justify-between items-start mb-4">
+                   <div className="flex items-center gap-3">
+                      <div className="p-2 rounded bg-white/5 border border-white/10 text-term-cyan group-hover:text-white group-hover:bg-term-cyan group-hover:border-term-cyan transition-all duration-300">
+                        <Folder className="w-4 h-4 md:w-5 md:h-5" />
                       </div>
-                      <div className="text-term-green">$ run build</div>
-                      <div className="text-slate-400 group-hover:text-term-cyan/70 transition-colors">Building {project.title}...</div>
-                      <div className="text-term-cyan">Done in 2.4s.</div>
+                      <div>
+                        <h3 className="text-lg md:text-xl font-bold text-white group-hover:text-term-cyan transition-colors leading-tight">
+                           {project.title}
+                        </h3>
+                        <div className="flex items-center gap-2 mt-1">
+                           <span className={`w-1.5 h-1.5 rounded-full ${project.status === 'completed' ? 'bg-term-green animate-pulse' : 'bg-yellow-500'}`}></span>
+                           <span className="text-[10px] font-mono text-slate-500 uppercase tracking-wider">{project.status}</span>
+                        </div>
+                      </div>
                    </div>
-                   
-                   <div className="mt-auto">
-                      <div className={`inline-flex items-center px-2 py-1 border text-xs font-mono uppercase tracking-wider transition-all duration-300 group-hover:scale-105 ${
-                        project.status === 'completed' 
-                        ? 'border-term-green/30 text-term-green bg-term-green/10 group-hover:bg-term-green/20 group-hover:shadow-[0_0_10px_rgba(16,185,129,0.2)]'
-                        : 'border-term-yellow/30 text-term-yellow bg-term-yellow/10 group-hover:bg-term-yellow/20'
-                      }`}>
-                         [{project.status}]
-                      </div>
+
+                   {/* Quick Links (Top Right) */}
+                   <div className="flex gap-2">
+                      {project.githubUrl && (
+                         <a 
+                            href={project.githubUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="p-2 rounded-full hover:bg-white/10 text-slate-400 hover:text-white transition-colors"
+                            title="View Code"
+                         >
+                            <ArrowUpRight className="w-4 h-4 md:w-5 md:h-5" />
+                         </a>
+                      )}
+                      {project.link && (
+                         <a 
+                            href={project.link}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="p-2 rounded-full hover:bg-term-cyan/20 text-slate-400 hover:text-term-cyan transition-colors"
+                            title="Live Demo"
+                         >
+                            <Play className="w-4 h-4 md:w-5 md:h-5" />
+                         </a>
+                      )}
                    </div>
                 </div>
 
-                {/* Right: Details */}
-                <div className="flex-1 p-6 md:p-8">
-                   <div className="flex justify-between items-start">
-                      <div className="flex items-center gap-3 mb-4">
-                         <Folder className="w-5 h-5 text-term-cyan fill-term-cyan/20 group-hover:fill-term-cyan/40 transition-all duration-300 group-hover:rotate-6" />
-                         <h3 className="text-xl font-bold text-white font-mono group-hover:text-term-cyan transition-colors">{project.title}</h3>
-                      </div>
-                      {project.githubUrl && (
-                        <a href={project.githubUrl} target="_blank" rel="noopener noreferrer">
-                          <ArrowUpRight className="w-5 h-5 text-slate-500 group-hover:text-term-cyan transition-colors group-hover:translate-x-1 group-hover:-translate-y-1" />
-                        </a>
+                {/* Description */}
+                <p className="text-slate-400 text-xs md:text-sm leading-relaxed mb-6 flex-grow line-clamp-3 md:line-clamp-none">
+                   {project.description}
+                </p>
+
+                {/* Footer: Tech Stack & Decorative Terminal Line */}
+                <div className="mt-auto">
+                   <div className="flex flex-wrap gap-2 mb-4">
+                      {project.tags.slice(0, 4).map(tag => (
+                         <span key={tag} className="flex items-center gap-1 px-2 py-1 rounded-sm bg-black/30 border border-white/5 text-[10px] md:text-xs text-slate-300 font-mono hover:border-term-cyan/30 transition-colors">
+                            <TechIcon tag={tag} />
+                            {tag}
+                         </span>
+                      ))}
+                      {project.tags.length > 4 && (
+                        <span className="px-2 py-1 text-[10px] text-slate-500">+{project.tags.length - 4}</span>
                       )}
                    </div>
 
-                   <p className="text-slate-400 font-mono text-sm leading-relaxed mb-6 border-l-2 border-white/10 pl-4 group-hover:border-term-cyan/50 group-hover:text-slate-300 transition-all">
-                      {project.description}
-                   </p>
-
-                   <div className="space-y-4">
-                      <div className="text-xs font-mono text-slate-500">Stack Analysis:</div>
-                      <div className="flex flex-wrap gap-3">
-                         {project.tags.map(tag => (
-                            <div key={tag} className="relative group/icon">
-                               <div className="
-                                  p-2 rounded-md bg-white/5 border border-white/5 text-slate-400 
-                                  hover:text-term-cyan hover:border-term-cyan/50 hover:bg-term-cyan/10 
-                                  hover:shadow-[0_0_15px_-2px_rgba(6,182,212,0.4)] hover:-translate-y-1 
-                                  transition-all duration-300 ease-out cursor-help
-                               ">
-                                  <TechIcon tag={tag} />
-                               </div>
-                               
-                               {/* Tooltip */}
-                               <div className="absolute -top-10 left-1/2 -translate-x-1/2 px-2 py-1 bg-[#0A0A0A] border border-slate-700 text-slate-200 text-[10px] font-mono rounded opacity-0 transform translate-y-2 group-hover/icon:opacity-100 group-hover/icon:translate-y-0 transition-all duration-200 pointer-events-none whitespace-nowrap z-20 shadow-xl">
-                                  {tag}
-                                  <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-2 h-2 bg-[#0A0A0A] border-r border-b border-slate-700 transform rotate-45"></div>
-                               </div>
-                            </div>
-                         ))}
-                      </div>
-                   </div>
-                   
-                   <div className="mt-8 pt-4 border-t border-white/5 flex gap-4">
-                      {/* View Source Button - Always shows if githubUrl exists */}
-                      {project.githubUrl && (
-                        <a 
-                          href={project.githubUrl} 
-                          target="_blank" 
-                          rel="noopener noreferrer"
-                          className="text-xs font-mono flex items-center gap-2 text-slate-400 hover:text-white hover:underline decoration-term-green transition-all"
-                        >
-                           <Terminal className="w-3 h-3" /> View Source
-                        </a>
-                      )}
-                      
-                      {/* Live Demo Button - Only shows if link exists */}
-                      {project.link && (
-                        <a 
-                          href={project.link} 
-                          target="_blank" 
-                          rel="noopener noreferrer"
-                          className="text-xs font-mono flex items-center gap-2 text-slate-400 hover:text-white hover:underline decoration-term-cyan transition-all"
-                        >
-                           <Play className="w-3 h-3" /> Live Demo
-                        </a>
-                      )}
+                   {/* Terminal Command Decoration */}
+                   <div className="pt-3 border-t border-white/5 font-mono text-[10px] text-slate-600 flex items-center gap-2">
+                      <span className="text-term-green">➜</span>
+                      <span>npm run deploy <span className="opacity-50">--production</span></span>
+                      <span className="animate-pulse ml-1 bg-slate-500 w-1.5 h-3 inline-block align-middle"></span>
                    </div>
                 </div>
               </GlassCard>

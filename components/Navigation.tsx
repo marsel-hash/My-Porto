@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { NAV_ITEMS, SITE_REPO } from '../constants';
+import { NAV_ITEMS } from '../constants';
 import { SectionId } from '../types';
-import { Terminal, Menu, X, Wifi, Battery, Clock, Volume2, Github } from 'lucide-react';
+import { Terminal, Menu, X, Wifi, Clock, Github } from 'lucide-react';
 
 interface NavigationProps {
   onNavigate?: (id: SectionId) => void;
@@ -96,16 +96,7 @@ const Navigation: React.FC<NavigationProps> = ({ onNavigate }) => {
         </div>
 
         <div className="flex items-center gap-3 sm:gap-4 h-full">
-          {/* Source Code Link */}
-          <a 
-            href={SITE_REPO}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="hidden md:flex items-center gap-2 text-slate-400 hover:text-white transition-all border border-white/5 px-2 py-0.5 rounded bg-white/5 hover:border-term-cyan/50 group"
-          >
-            <Github className="w-3 h-3 group-hover:text-term-cyan transition-colors" />
-            <span>SOURCE</span>
-          </a>
+          {/* Removed Source Button */}
 
           <div className="hidden md:flex items-center gap-4 text-slate-400 border-l border-white/10 pl-4">
             <div className="flex items-center gap-2 hover:text-term-green transition-colors cursor-pointer" title="Connected">
@@ -137,7 +128,6 @@ const Navigation: React.FC<NavigationProps> = ({ onNavigate }) => {
           <div className="border border-white/10 p-2 space-y-1">
             <div className="bg-white/10 px-3 py-2 text-slate-400 text-xs mb-2 flex justify-between">
               <span>// MENU SELECTION</span>
-              <a href={SITE_REPO} target="_blank" className="text-term-cyan underline">Get Source</a>
             </div>
             {NAV_ITEMS.map((item, index) => (
               <button
