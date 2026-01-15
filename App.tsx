@@ -81,7 +81,7 @@ const Portfolio: React.FC = () => {
             rel="noopener noreferrer"
             className="inline-flex items-center gap-1.5 text-fuchsia-400 hover:text-white transition-all group"
           >
-            <span className="hover:drop-shadow-[0_0_8px_rgba(217,70,239,0.8)]">Marsel</span>
+            <span className="hover:drop-shadow-[0_0_8px_rgba(217,70,239,0.8)]">test</span>
             <ShieldCheck className="w-3.5 h-3.5 text-term-cyan opacity-50 group-hover:opacity-100 group-hover:scale-110 transition-all" />
           </a>
         </p>
