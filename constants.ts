@@ -99,10 +99,10 @@ export const SKILLS: Skill[] = [
 export const PHOTOS: Photo[] = [
   {
     id: 'p1',
-    url: 'https://picsum.photos/800/600?random=1',
-    caption: 'Neon Nights',
+    url: '/img/1.png',
+    caption: 'Japan',
     exif: 'Sony A7III • 35mm • f/1.4',
-    orientation: 'landscape'
+    orientation: 'portrait'
   },
   {
     id: 'p2',
