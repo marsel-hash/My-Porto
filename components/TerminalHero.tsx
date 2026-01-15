@@ -233,7 +233,8 @@ const TerminalHero: React.FC = () => {
       <div className="max-w-5xl w-full relative z-10 animate-float">
         <GlassCard 
             variant="default" 
-            className="flex flex-col shadow-[0_0_50px_-15px_rgba(0,0,0,0.8)] border-white/15 cursor-text" 
+            alwaysGlow={true} // ENABLE ALWAYS ON GLOW HERE
+            className="flex flex-col border-white/15 cursor-text" 
             noHeader
             onClick={handleTerminalClick}
         >

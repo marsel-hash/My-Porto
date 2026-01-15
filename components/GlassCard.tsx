@@ -5,6 +5,7 @@ export interface GlassCardProps extends React.HTMLAttributes<HTMLDivElement> {
   className?: string;
   variant?: 'default' | 'fuchsia' | 'cyan' | 'violet' | 'emerald';
   noHeader?: boolean; // Option to hide the "window header"
+  alwaysGlow?: boolean; // NEW: Force glow state
 }
 
 const GlassCard: React.FC<GlassCardProps> = ({ 
@@ -13,26 +14,44 @@ const GlassCard: React.FC<GlassCardProps> = ({
   style,
   variant = 'default',
   noHeader = false,
+  alwaysGlow = false,
   ...props
 }) => {
   
   // Mapping variant ke warna border/accent
-  const borderColor = {
-    default: 'border-slate-800 group-hover:border-slate-500',
-    fuchsia: 'border-fuchsia-900/50 group-hover:border-fuchsia-500',
-    cyan: 'border-cyan-900/50 group-hover:border-cyan-400',
-    violet: 'border-violet-900/50 group-hover:border-violet-400',
-    emerald: 'border-emerald-900/50 group-hover:border-emerald-400',
-  }[variant];
+  // Logic updated: If alwaysGlow is true, use the active color immediately.
+  const borderColor = alwaysGlow 
+    ? {
+        default: 'border-purple-500/50',
+        fuchsia: 'border-fuchsia-400',
+        cyan: 'border-cyan-400',
+        violet: 'border-violet-400',
+        emerald: 'border-emerald-400',
+      }[variant]
+    : {
+        default: 'border-slate-800 group-hover:border-purple-500/50',
+        fuchsia: 'border-fuchsia-900/50 group-hover:border-fuchsia-400',
+        cyan: 'border-cyan-900/50 group-hover:border-cyan-400',
+        violet: 'border-violet-900/50 group-hover:border-violet-400',
+        emerald: 'border-emerald-900/50 group-hover:border-emerald-400',
+      }[variant];
 
-  // Efek Glow Shadow saat Hover
-  const shadowColor = {
-    default: 'hover:shadow-[0_0_40px_-10px_rgba(255,255,255,0.1)]',
-    fuchsia: 'hover:shadow-[0_0_40px_-10px_rgba(217,70,239,0.3)]',
-    cyan: 'hover:shadow-[0_0_40px_-10px_rgba(6,182,212,0.3)]',
-    violet: 'hover:shadow-[0_0_40px_-10px_rgba(139,92,246,0.3)]',
-    emerald: 'hover:shadow-[0_0_40px_-10px_rgba(16,185,129,0.3)]',
-  }[variant];
+  // Efek Glow Shadow - Enhanced logic for alwaysGlow
+  const shadowColor = alwaysGlow
+    ? {
+        default: 'shadow-[0_0_50px_-12px_rgba(168,85,247,0.6)]',
+        fuchsia: 'shadow-[0_0_50px_-12px_rgba(217,70,239,0.6)]',
+        cyan: 'shadow-[0_0_50px_-12px_rgba(6,182,212,0.6)]',
+        violet: 'shadow-[0_0_50px_-12px_rgba(139,92,246,0.6)]',
+        emerald: 'shadow-[0_0_50px_-12px_rgba(16,185,129,0.6)]',
+      }[variant]
+    : {
+        default: 'hover:shadow-[0_0_50px_-12px_rgba(168,85,247,0.5)]',
+        fuchsia: 'hover:shadow-[0_0_50px_-12px_rgba(217,70,239,0.5)]',
+        cyan: 'hover:shadow-[0_0_50px_-12px_rgba(6,182,212,0.5)]',
+        violet: 'hover:shadow-[0_0_50px_-12px_rgba(139,92,246,0.5)]',
+        emerald: 'hover:shadow-[0_0_50px_-12px_rgba(16,185,129,0.5)]',
+      }[variant];
 
   const headerColor = {
     default: 'bg-slate-900 group-hover:bg-slate-800',
@@ -49,8 +68,8 @@ const GlassCard: React.FC<GlassCardProps> = ({
         bg-[#0A0A0A]/90 backdrop-blur-md
         border ${borderColor}
         rounded-sm
-        transition-all duration-300 ease-out
-        hover:-translate-y-1 /* Efek Levitasi */
+        transition-all duration-500 ease-out
+        ${!alwaysGlow ? 'hover:-translate-y-1' : ''} /* Only levitate on hover if not static glow */
         ${shadowColor} /* Efek Glow */
         overflow-hidden
         flex flex-col

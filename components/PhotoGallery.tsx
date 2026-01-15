@@ -69,8 +69,8 @@ const PhotoGallery: React.FC<{ mode?: 'preview' | 'full'; onViewAll?: () => void
                      break-inside-avoid
                      group relative 
                      bg-[#0F0F0F] border border-white/5 
-                     hover:border-term-magenta hover:z-10
-                     hover:shadow-[0_0_30px_-5px_rgba(217,70,239,0.3)]
+                     hover:border-purple-500/50 hover:z-10
+                     hover:shadow-[0_0_50px_-12px_rgba(168,85,247,0.5)]
                      cursor-pointer p-1.5 md:p-2.5
                      transition-all duration-300 ease-out
                    "
