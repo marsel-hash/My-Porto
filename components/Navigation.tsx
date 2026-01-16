@@ -12,7 +12,6 @@ const Navigation: React.FC<NavigationProps> = ({ onNavigate }) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [time, setTime] = useState(new Date());
 
-  // Clock Update
   useEffect(() => {
     const timer = setInterval(() => setTime(new Date()), 1000);
     return () => clearInterval(timer);
@@ -96,7 +95,6 @@ const Navigation: React.FC<NavigationProps> = ({ onNavigate }) => {
         </div>
 
         <div className="flex items-center gap-3 sm:gap-4 h-full">
-          {/* Removed Source Button */}
 
           <div className="hidden md:flex items-center gap-4 text-slate-400 border-l border-white/10 pl-4">
             <div className="flex items-center gap-2 hover:text-term-green transition-colors cursor-pointer" title="Connected">
