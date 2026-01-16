@@ -4,8 +4,8 @@ export interface GlassCardProps extends React.HTMLAttributes<HTMLDivElement> {
   children: ReactNode;
   className?: string;
   variant?: 'default' | 'fuchsia' | 'cyan' | 'violet' | 'emerald';
-  noHeader?: boolean; // Option to hide the "window header"
-  alwaysGlow?: boolean; // NEW: Force glow state
+  noHeader?: boolean; 
+  alwaysGlow?: boolean; 
 }
 
 const GlassCard: React.FC<GlassCardProps> = ({ 
@@ -18,8 +18,6 @@ const GlassCard: React.FC<GlassCardProps> = ({
   ...props
 }) => {
   
-  // Mapping variant ke warna border/accent
-  // Logic updated: If alwaysGlow is true, use the active color immediately.
   const borderColor = alwaysGlow 
     ? {
         default: 'border-purple-500/50',
@@ -36,7 +34,6 @@ const GlassCard: React.FC<GlassCardProps> = ({
         emerald: 'border-emerald-900/50 group-hover:border-emerald-400',
       }[variant];
 
-  // Efek Glow Shadow - Enhanced logic for alwaysGlow
   const shadowColor = alwaysGlow
     ? {
         default: 'shadow-[0_0_50px_-12px_rgba(168,85,247,0.6)]',
@@ -78,7 +75,6 @@ const GlassCard: React.FC<GlassCardProps> = ({
       style={style}
       {...props}
     >
-      {/* Window Header (Fake Titlebar) */}
       {!noHeader && (
         <div className={`h-6 w-full ${headerColor} border-b border-white/5 flex items-center px-2 gap-2 shrink-0 transition-colors duration-300`}>
           <div className="flex gap-1.5">
@@ -89,8 +85,6 @@ const GlassCard: React.FC<GlassCardProps> = ({
           <div className="ml-auto w-full h-[1px] bg-white/5" />
         </div>
       )}
-
-      {/* Content Area */}
       <div className="p-0 flex-1 relative z-10">
         {children}
       </div>
