@@ -52,12 +52,6 @@ const ContactSection: React.FC = () => {
             <h2 className="text-3xl md:text-4xl font-bold text-white font-mono">Initialize <span className="text-term-green">Handshake</span></h2>
           </div>
         </Reveal>
-
-        {/* 
-           UPDATED GRID:
-           - grid-cols-3 (forced on mobile and desktop)
-           - gap-2 (tight on mobile) to md:gap-6
-        */}
         <div className="grid grid-cols-3 gap-2 md:gap-6">
           {contacts.map((contact, idx) => (
             <Reveal key={idx} delay={idx * 0.1}>
@@ -68,7 +62,6 @@ const ContactSection: React.FC = () => {
                 className="group block h-full"
               >
                 <GlassCard 
-                  // Compact padding on mobile (p-3), larger on desktop (md:p-8)
                   className={`h-full p-3 md:p-8 transition-all duration-300 hover:-translate-y-2 border-white/10 ${contact.borderColor}`} 
                   noHeader
                 >
@@ -77,16 +70,12 @@ const ContactSection: React.FC = () => {
                         <div className={`w-10 h-10 md:w-12 md:h-12 rounded-lg bg-white/5 flex items-center justify-center mb-3 md:mb-6 border border-white/10 transition-colors ${contact.bgHover}`}>
                            <contact.icon className={`w-5 h-5 md:w-6 md:h-6 text-slate-400 group-hover:text-white transition-colors`} />
                         </div>
-                        
-                        {/* Hidden on mobile to save space, visible on desktop */}
                         <div className="hidden md:flex items-center gap-2 font-mono text-xs text-slate-500 mb-2">
                            <Terminal className="w-3 h-3" />
                            <span>{contact.cmd}</span>
                         </div>
                         
-                        {/* Compact Text for Mobile */}
                         <h3 className="text-[10px] md:text-lg font-bold text-slate-200 group-hover:text-white mb-1 w-full truncate px-1 md:px-0">
-                           {/* Shorten value on mobile if needed, but flex truncation handles it */}
                            <span className="md:hidden">{contact.label}</span>
                            <span className="hidden md:inline">{contact.value}</span>
                         </h3>
@@ -108,8 +97,6 @@ const ContactSection: React.FC = () => {
             </Reveal>
           ))}
         </div>
-
-        {/* Footer Terminal Prompt */}
         <div className="mt-12 md:mt-16 max-w-2xl mx-auto bg-black/50 border border-white/10 rounded-sm p-4 font-mono text-xs md:text-sm">
            <div className="flex items-center gap-2 text-slate-500 mb-2">
               <div className="w-2.5 h-2.5 rounded-full bg-red-500/50"></div>
