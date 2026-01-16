@@ -18,7 +18,7 @@ const bootLines = [
   "INFECTING SYSTEM CORE... [ STABLE ]",
   "CONFIGURING VIEWPORT...",
   "SYSTEM READY.",
-  "EXECUTING PORTFOLIO.EXE..."
+  "EXECUTING MARSEL.EXE..."
 ];
 
 const BootLoader: React.FC<BootLoaderProps> = ({ onComplete }) => {
@@ -30,17 +30,15 @@ const BootLoader: React.FC<BootLoaderProps> = ({ onComplete }) => {
     const timeouts: ReturnType<typeof setTimeout>[] = [];
 
     bootLines.forEach((line, index) => {
-      // Vary delay for specific lines
+
       const isInfectLine = line.includes("INFECT");
       const randomDelay = isInfectLine ? 600 : (Math.random() * 300 + 100);
       delay += randomDelay;
 
       const timeout = setTimeout(() => {
         setLines(prev => [...prev, line]);
-        // Sound Effect
         try { playKeystrokeSound(); } catch(e) {} 
         
-        // Auto scroll to bottom
         if (containerRef.current) {
           containerRef.current.scrollTop = containerRef.current.scrollHeight;
         }
@@ -48,7 +46,6 @@ const BootLoader: React.FC<BootLoaderProps> = ({ onComplete }) => {
       timeouts.push(timeout);
     });
 
-    // Finish sequence
     const finalTimeout = setTimeout(() => {
       onComplete();
     }, delay + 800);
@@ -72,7 +69,6 @@ const BootLoader: React.FC<BootLoaderProps> = ({ onComplete }) => {
         <div className="animate-pulse">_</div>
       </div>
       
-      {/* ProgressBar */}
       <div className="absolute bottom-0 left-0 h-1 bg-fuchsia-600 transition-all duration-300 ease-out" 
            style={{ width: `${(lines.length / bootLines.length) * 100}%` }} />
     </div>
