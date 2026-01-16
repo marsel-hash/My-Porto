@@ -8,7 +8,7 @@ const AboutSection: React.FC = () => {
 
   return (
     <section id="about" className="py-24 px-4 md:px-8">
-      {/* Container Lebar 7xl untuk tampilan desktop yang lebih luas */}
+      {/* Container Lebar 7xl buat desktop */}
       <div className="max-w-7xl mx-auto">
         <Reveal>
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10">
