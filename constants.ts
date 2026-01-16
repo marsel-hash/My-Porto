@@ -26,7 +26,6 @@ export const PROFILE: Profile = {
   }
 };
 
-// URL Repository untuk website ini (Ganti jika kamu sudah buat repo sendiri)
 export const SITE_REPO = "https://github.com/marsel-hash/My-Porto";
 
 export const PROJECTS: Project[] = [
