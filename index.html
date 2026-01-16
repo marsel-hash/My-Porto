@@ -3,21 +3,50 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="google-site-verification" content="8WZxQlZ8zCTth9mk3yb8sWf209CAQLyaNHpPT3ej0Q4" />
-    <title>Marsel - Fanxiety</title>
+    
+    <!-- SEO: Title contains the full name for Google Search results, but won't change the page design -->
+    <title>Musa Marselino (Marsel) | Web Developer & Photographer</title>
+    
+    <!-- SEO: Meta Description includes the full name -->
+    <meta name="description" content="Official portfolio of Musa Marselino (Marsel). Showcase of Web Development projects, Python automation tools, and Photography." />
+    
+    <!-- SEO: Keywords and Author -->
+    <meta name="keywords" content="Musa Marselino, Marsel, Musa, Marselino, Web Developer, Programmer, Photographer, Portfolio, Frontend, Backend, Security" />
+    <meta name="author" content="Musa Marselino" />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Musa Marselino - Web Developer Portfolio" />
+    <meta property="og:description" content="Explore the projects and photography of Musa Marselino (Marsel)." />
+
+    <!-- Structured Data (JSON-LD): Tells Google that 'Marsel' is 'Musa Marselino' -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Musa Marselino",
+      "alternateName": "Marsel,Musa",
+      "jobTitle": "Web Developer",
+      "description": "Programmer and Photographer specializing in Web Development and Automation.",
+      "url": "https://github.com/marsel-hash",
+      "sameAs": [
+        "https://github.com/marsel-hash",
+        "https://instagram.com/kazunji_"
+      ]
+    }
+    </script>
+
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700;800&display=swap" rel="stylesheet">
     <style>
-      /* Base Terminal Style */
       body {
-        background-color: #030005; /* Deep Purple Black Background */
-        overflow-x: hidden; /* Fix horizontal scroll but allow vertical */
-        cursor: crosshair; /* Crosshair cursor for precision feel */
+        background-color: #030005; 
+        overflow-x: hidden; 
+        cursor: crosshair; 
       }
 
-      /* Custom Scrollbar */
       ::-webkit-scrollbar {
         width: 8px;
       }
@@ -29,10 +58,9 @@
         border: 1px solid #000;
       }
       ::-webkit-scrollbar-thumb:hover {
-        background: #a855f7; /* Purple Hover */
+        background: #a855f7; 
       }
 
-      /* Glitch Keyframes */
       @keyframes glitch {
         0% { transform: translate(0) }
         20% { transform: translate(-2px, 2px) }
@@ -45,7 +73,6 @@
         animation: glitch 0.2s cubic-bezier(.25, .46, .45, .94) both infinite;
       }
 
-      /* Floating Animation */
       @keyframes float {
         0%, 100% { transform: translateY(0px); }
         50% { transform: translateY(-15px); }
@@ -54,7 +81,6 @@
         animation: float 6s ease-in-out infinite;
       }
 
-      /* Scanline Animation */
       @keyframes scanline {
         0% { transform: translateY(-100%); opacity: 0; }
         10% { opacity: 1; }
@@ -63,7 +89,7 @@
       }
       .animate-scanline {
         animation: scanline 4s linear infinite;
-        background: linear-gradient(to bottom, transparent, rgba(168, 85, 247, 0.1), transparent); /* Purple Scanline */
+        background: linear-gradient(to bottom, transparent, rgba(168, 85, 247, 0.1), transparent); 
         height: 100px;
         width: 100%;
         position: absolute;
@@ -72,7 +98,6 @@
         pointer-events: none;
       }
 
-      /* CRT Turn On Animation (Linux Boot Style) */
       @keyframes crtTurnOn {
         0% {
           transform: scale(1, 0.002);
@@ -113,21 +138,20 @@
           extend: {
             fontFamily: {
               mono: ['"JetBrains Mono"', 'monospace'],
-              sans: ['"JetBrains Mono"', 'monospace'], // Force Mono everywhere
+              sans: ['"JetBrains Mono"', 'monospace'], 
             },
             colors: {
               term: {
-                bg: '#030005',     /* Very Dark Purple Black */
-                card: '#090410',   /* Dark Violet Card BG */
-                border: '#1F1030', /* Purple-tinted border */
+                bg: '#030005',     
+                card: '#090410',   
+                border: '#1F1030', 
+              
+                green: '#a855f7',  
+                cyan: '#e879f9',   
+                magenta: '#818cf8', 
                 
-                /* THEME REBRAND: PURPLE CYBERPUNK */
-                green: '#a855f7',   /* Was Green -> NOW PURPLE (Primary Brand) */
-                cyan: '#e879f9',    /* Was Cyan -> NOW FUCHSIA (Secondary) */
-                magenta: '#818cf8', /* Was Magenta -> NOW INDIGO (Tertiary) */
-                
-                yellow: '#fbbf24',  /* Keep Yellow for contrast */
-                dim: '#6b21a8'      /* Dim Purple */
+                yellow: '#fbbf24',
+                dim: '#6b21a8'      
               }
             }
           }
