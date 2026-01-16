@@ -30,6 +30,15 @@ export const PROFILE: Profile = {
 export const SITE_REPO = "https://github.com/marsel-hash/My-Porto";
 
 export const PROJECTS: Project[] = [
+  
+  {
+    id: '6',
+    title: 'LuxVault',
+    description: 'Free secure file encryption tool. Encrypt files locally in your browser using AES-GCM. Convert files to secure code strings (Lux format) without server uploads. Protect your data privacy.',
+    tags: ['Encryption', 'Security', 'AES-GCM', 'Privacy', 'Web Crypto'],
+    status: 'completed',
+    link: 'https://luxvault.pages.dev'
+  },
   {
     id: '5',
     title: 'Infect',
