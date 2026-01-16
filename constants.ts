@@ -77,7 +77,7 @@ export const PROJECTS: Project[] = [
     description: 'A logic-based Python algorithm that calculates compatibility percentages based on string input matching patterns.',
     tags: ['Python', 'Algorithm', 'Logic'],
     status: 'completed',
-    githubUrl: 'https://github.com/marsel-hash/love-calculator'
+    link: 'kalkulatorlove.pages.dev'
   }
 ];
 
