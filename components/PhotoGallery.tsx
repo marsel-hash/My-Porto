@@ -14,17 +14,12 @@ const PhotoGallery: React.FC<{ mode?: 'preview' | 'full'; onViewAll?: () => void
   const { photos } = useContent();
   const [selectedPhoto, setSelectedPhoto] = useState<Photo | null>(null);
 
-  // LOGIC BARU: Disable scroll saat modal foto terbuka
   useEffect(() => {
     if (selectedPhoto) {
-      // Kunci scroll body
       document.body.style.overflow = 'hidden';
     } else {
-      // Kembalikan scroll body ke semula
       document.body.style.overflow = '';
     }
-
-    // Cleanup function untuk memastikan scroll kembali aktif jika komponen di-unmount
     return () => {
       document.body.style.overflow = '';
     };
@@ -35,7 +30,6 @@ const PhotoGallery: React.FC<{ mode?: 'preview' | 'full'; onViewAll?: () => void
   return (
     <section 
       id="photography" 
-      // FIX: Add significantly more bottom padding (pb-48) when in 'full' mode to prevent footer overlap
       className={`px-4 md:px-8 ${mode === 'full' ? 'pt-20 pb-48' : 'py-20'}`}
     >
       <div className="max-w-7xl mx-auto">
@@ -52,14 +46,6 @@ const PhotoGallery: React.FC<{ mode?: 'preview' | 'full'; onViewAll?: () => void
              )}
           </div>
         </Reveal>
-
-        {/* 
-           UPDATED LAYOUT: 
-           - Reverted to 'columns-' (Masonry) to keep ORIGINAL ASPECT RATIO (Portrait/Landscape mixed).
-           - Reduced max columns to 'md:columns-3' (removed columns-4). 
-             Result: Images are LARGER and fill the screen width better, eliminating the empty right space.
-           - Added 'space-y-6' to manage vertical gaps in masonry.
-        */}
         <div className="columns-2 md:columns-3 gap-6 space-y-6">
            {displayedPhotos.map((photo, idx) => (
               <Reveal key={photo.id} delay={idx * 0.05}>
@@ -75,7 +61,6 @@ const PhotoGallery: React.FC<{ mode?: 'preview' | 'full'; onViewAll?: () => void
                      transition-all duration-300 ease-out
                    "
                  >
-                    {/* Image Container - No fixed aspect ratio, allows natural height */}
                     <div className="overflow-hidden relative mb-2 md:mb-3 bg-[#050505] w-full">
                        <img 
                           src={photo.url} 
@@ -86,8 +71,6 @@ const PhotoGallery: React.FC<{ mode?: 'preview' | 'full'; onViewAll?: () => void
                        
                        <Maximize2 className="absolute top-2 right-2 w-4 h-4 text-white opacity-0 group-hover:opacity-100 z-20 drop-shadow-md transition-all duration-300 group-hover:rotate-90" />
                     </div>
-                    
-                    {/* Metadata */}
                     <div className="font-mono text-[9px] md:text-xs text-slate-500 flex justify-between items-center transition-colors group-hover:text-white">
                        <span className="truncate max-w-[80%] group-hover:text-term-magenta">{photo.caption}</span>
                        <span className="opacity-50 text-[8px] border border-white/10 px-1 rounded">
@@ -109,8 +92,6 @@ const PhotoGallery: React.FC<{ mode?: 'preview' | 'full'; onViewAll?: () => void
               </button>
            </div>
         )}
-
-        {/* Modal / Lightbox */}
         {selectedPhoto && createPortal(
            <div 
              className="fixed inset-0 z-[99999] bg-black/98 backdrop-blur-xl flex items-center justify-center p-4 md:p-8 overflow-hidden touch-none"
@@ -120,7 +101,6 @@ const PhotoGallery: React.FC<{ mode?: 'preview' | 'full'; onViewAll?: () => void
                 className="max-w-7xl w-full border border-white/10 bg-[#050505] shadow-2xl flex flex-col h-[80vh] md:h-[90vh] max-h-[1000px] rounded-sm overflow-hidden" 
                 onClick={e => e.stopPropagation()}
               >
-                 {/* Header */}
                  <div className="h-12 md:h-14 shrink-0 bg-white/5 border-b border-white/10 flex items-center justify-between px-4 md:px-6 select-none">
                     <span className="font-mono text-xs md:text-sm text-slate-400 truncate pr-4">{selectedPhoto.caption}</span>
                     <button 
@@ -130,8 +110,6 @@ const PhotoGallery: React.FC<{ mode?: 'preview' | 'full'; onViewAll?: () => void
                        <X className="w-5 h-5" />
                     </button>
                  </div>
-                 
-                 {/* Main Image Area */}
                  <div className="p-2 md:p-8 flex justify-center items-center bg-[#080808] overflow-hidden flex-1 relative">
                     <img 
                       src={selectedPhoto.url} 
@@ -139,8 +117,6 @@ const PhotoGallery: React.FC<{ mode?: 'preview' | 'full'; onViewAll?: () => void
                       className="w-auto h-auto max-w-full max-h-full object-contain shadow-2xl" 
                     />
                  </div>
-                 
-                 {/* Footer of Modal */}
                  <div className="shrink-0 p-3 md:p-4 border-t border-white/10 flex justify-between font-mono text-[10px] md:text-sm text-slate-500 bg-[#0A0A0A]">
                     <div className="flex gap-4">
                        <span>{selectedPhoto.orientation?.toUpperCase() || 'IMG'}</span>
