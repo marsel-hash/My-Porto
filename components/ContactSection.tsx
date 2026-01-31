@@ -107,10 +107,10 @@ const ContactSection: React.FC = () => {
               <span className="text-term-green">root@portfolio</span>
               <span className="text-slate-500">:</span>
               <span className="text-term-cyan">~</span>
-              <span className="text-slate-300">$ echo "Thank you for visiting."</span>
+              <span className="text-slate-300">$ echo "jack of all trades, master of none"</span>
            </div>
            <div className="flex gap-2 mt-1">
-              <span className="text-slate-400">Thank you for visiting.</span>
+              <span className="text-slate-400">jack of all trades, master of none</span>
            </div>
            <div className="flex gap-2 mt-1">
               <span className="text-term-green">root@portfolio</span>
